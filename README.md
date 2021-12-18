@@ -1,7 +1,7 @@
 ## ResponsiveWeb_project/ 2021.12.19 
 
 ### 코드 확인
-starbucks_coffee.ipynb  -> 스타벅스 사이트 매장정보 크롤링   
+src/main/webapp/WEB-INF/views/ -> Jsp 코드    
 caffe_pascucci.ipynb -> 카페 파스쿠찌 사이트 매장정보 크롤링  
 store_analysis .ipynb -> csv 파일 비교 + 그래프 확인  
 ***
