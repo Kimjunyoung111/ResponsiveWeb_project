@@ -1,7 +1,7 @@
 ## ResponsiveWeb_project/ 2021.12.19 
 
 ### 포트폴리오
-ResponsiveWeb.pdf ->  포트폴리오 pdf 파일  
+ResponsiveWeb.pdf ->  포트폴리오 pdf 파일  -> 바로 확인 가능
 ResponsiveWeb.pptx -> 포트폴리오 ppt 파일
 ***
 ### 코드 확인
