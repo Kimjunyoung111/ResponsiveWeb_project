@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.MybatisDAO">
+	
+	<select id="selectUserCount" parameterType="UserVO"  resultType="int">
+		select count(*) from "USER" where id=#{id} and password = #{password}
+	</select>
+	
+	<insert id="insertUser" parameterType="UserVO">
+		INSERT INTO "USER" (ID, PASSWORD, NICKNAME) VALUES (#{id},#{password},'user' || user_idx_seq.nextval)
+	</insert>
+	
+	<select id="selectContentsTop6" resultType="contentsVO">
+		<![CDATA[
+			SELECT * FROM (SELECT * FROM CONTENTS ORDER BY views DESC) WHERE ROWNUM <= 6
+		]]>
+	</select>
+	
+	<select id="selectCount" parameterType="java.util.HashMap" resultType="int">
+		select count(*) from CONTENTS where category like '%' || #{category} || '%'
+	</select>
+	
+	<select id="selectContents" parameterType="java.util.HashMap" resultType="contentsVO">
+		select * from (
+			select rownum rnum, GG.* from (
+				select * from CONTENTS where category like '%' || #{category} || '%' order by idx desc
+			) GG
+		) where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="selectCountMy" parameterType="java.util.HashMap" resultType="int">
+		select count(*) from CONTENTS where category like '%' || #{category} || '%' and nickname = #{nickname}
+	</select>
+	
+	<select id="selectContentsMy" parameterType="java.util.HashMap" resultType="contentsVO">
+		select * from (
+			select rownum rnum, GG.* from (
+				select * from CONTENTS where category like '%' || #{category} || '%' and nickname = #{nickname} order by idx desc
+			) GG
+		) where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="selectByIdx" parameterType="int" resultType="contentsVO">
+		select * from CONTENTS where idx = #{idx}
+	</select>
+	
+	<select id="searchCount" parameterType="java.util.HashMap" resultType="int">
+		select count(*) from CONTENTS where ${select} LIKE '%' || #{text} || '%' and category like '%' || #{category} || '%'
+	</select>
+	
+	<select id="searchContents" parameterType="java.util.HashMap" resultType="contentsVO">
+		select * from (
+			select rownum rnum, GG.* from (
+				select * from CONTENTS where ${select} LIKE '%' || #{text} ||'%' and category like '%' || #{category} || '%' order by idx desc
+			) GG
+		) where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="searchNickname" parameterType="String" resultType="String">
+		select nickname from "USER" where id = #{id}
+	</select>
+	
+	<select id="searchCountMy" parameterType="java.util.HashMap" resultType="int">
+		select count(*) from CONTENTS where ${select} LIKE '%' || #{text} || '%' and category like '%' || #{category} || '%' and  nickname = #{nickname}
+	</select>
+	
+	<select id="searchContentsMy" parameterType="java.util.HashMap" resultType="contentsVO">
+		select * from (
+			select rownum rnum, GG.* from (
+				select * from CONTENTS where ${select} LIKE '%' || #{text} ||'%' and category like '%' || #{category} || '%' and  nickname = #{nickname} order by idx desc
+			) GG
+		) where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<delete id="deleteContent" parameterType="int">
+		delete from contents where idx = #{idx}
+	</delete>	
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from comments where idx = #{idx}
+	</delete>	
+	
+	<update id="incrementView" parameterType="int">
+		update contents set views = views + 1 where idx = #{idx}
+	</update>
+	
+	<select id="selectComments" parameterType="int" resultType="commentsVO">
+		select * from comments where idx = #{idx} ORDER BY TARGET_IDX
+	</select>
+	
+	<update id="incrementComment" parameterType="int">
+		update contents set commentNum = commentNum + 1 where idx = #{idx}
+	</update>	
+	
+	<insert id="insertReply" parameterType="java.util.HashMap">
+		INSERT INTO COMMENTS (NICKNAME, IDX, COMMENT_IDX ,COMMENT_LEV, TARGET_IDX ,CONTENT) VALUES (#{nickname}, #{idx}, comments_idx_seq.nextval, 1 , #{target_idx}, #{comment})
+	</insert>	
+	
+	<insert id="insertCommentReply" parameterType="java.util.HashMap">
+		INSERT INTO COMMENTS (NICKNAME, IDX, COMMENT_IDX ,COMMENT_LEV, TARGET_IDX ,CONTENT) VALUES (#{nickname}, #{idx}, comments_idx_seq.nextval, #{comment_lev}, #{target_idx} ,#{comment})
+	</insert>
+	
+	<select id="selectCommentTargetIdx" resultType="commentsVO">
+		select * from comments where target_idx = 're'
+	</select>	
+	
+	<update id="updateReply" parameterType="java.util.HashMap">
+		update comments set target_idx = #{target_idx2} where comment_idx = #{comment_idx}
+	</update>	
+		
+	<select id="selectById" parameterType="String" resultType="userVO">
+		select * from "USER" where id=#{id}
+	</select>	
+	
+	<insert id="uploadContent" parameterType="java.util.HashMap">
+		INSERT INTO CONTENTS (NICKNAME, PROFILE ,IDX, TITLE, CONTENT, CATEGORY, IMAGE) 
+		VALUES (#{nickname},#{profile},contents_idx_seq.nextval, #{title},#{content},#{category} ,#{image})
+	</insert>
+	
+	<update id="updateContent" parameterType="java.util.HashMap">
+		update CONTENTS set title=#{title}, content=#{content}, category=#{category}, image=#{image} where idx = #{idx}
+	</update>
+	
+	<update id="updatePassword" parameterType="java.util.HashMap">
+		update "USER" set password = #{password} where id = #{id}
+	</update>	
+	
+	<select id="selectNicknameCount" parameterType="java.util.HashMap"  resultType="int">
+		select count(*) from "USER" where nickname = #{update_nickname}
+	</select>
+	
+	<update id="updateContentNickname" parameterType="java.util.HashMap">
+		update CONTENTS set nickname = #{update_nickname} where nickname = #{nickname}
+	</update>
+	
+	<update id="updateCommentNickname" parameterType="java.util.HashMap">
+		update COMMENTS set nickname = #{update_nickname} where nickname = #{nickname}
+	</update>
+	
+	<update id="updateNickname" parameterType="java.util.HashMap">
+		update "USER" set nickname = #{update_nickname} where id = #{id}
+	</update>
+	
+	
+</mapper>

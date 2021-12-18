@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="userVO" class="com.project.vo.UserVO"></bean>
+	<bean id="userList" class="com.project.vo.UserList"></bean>
+	<bean id="contentsVO" class="com.project.vo.ContentsVO"></bean>
+	<bean id="contentsList" class="com.project.vo.ContentsList"></bean>
+	<bean id="commentsVO" class="com.project.vo.CommentsVO"></bean>
+	<bean id="commentsList" class="com.project.vo.CommentsList"></bean>
+		
+</beans>
