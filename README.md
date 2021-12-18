@@ -10,7 +10,5 @@ src/main/java/com/project/ -> Java 코드
 src/main/webapp/resources/ -> css/js/image 코드    
 ***
 ### 스프링 파일 다운로드 
-src/main/webapp/WEB-INF/views/ -> Jsp 코드    
-src/main/java/com/project/ -> Java 코드   
-src/main/webapp/resources/ -> css/js/
+responsiveWeb_1.zip -> 스프링 파일 zip 
 ***
