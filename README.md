@@ -1,10 +1,10 @@
 ## ResponsiveWeb_project/ 2021.12.19 
 
 ### 포트폴리오
-ResponsiveWeb-portfolio.pdf -> 포트폴리오 요약 pdf 파일 -> 바로 확인 가능    
-ResponsiveWeb-portfolio.pptx -> 포트폴리오 요약 ppt 파일   
-ResponsiveWeb.pdf ->  포트폴리오 pdf 파일  -> 바로 확인 가능   
-ResponsiveWeb.pptx -> 포트폴리오 ppt 파일
+ResponsiveWeb-portfolio.pdf -> 포트폴리오 pdf 파일 -> 바로 확인 가능    
+ResponsiveWeb-portfolio.pptx -> 포트폴리오 ppt 파일   
+ResponsiveWeb.pdf ->  프로젝트 내용 설명 pdf 파일 -> 바로 확인 가능   
+ResponsiveWeb.pptx -> 프로젝트 내용 설명 ppt 파일
 ***
 ### 코드 확인
 src/main/webapp/WEB-INF/views/ -> Jsp 코드    
